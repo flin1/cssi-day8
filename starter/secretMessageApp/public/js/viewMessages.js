@@ -1,4 +1,4 @@
-const getMessages = () => {
+/*const getMessages = () => {
     const messagesRef = firebase.database().ref();
     messagesRef.on('value', (snapshot) => {
         const data = snapshot.val();
@@ -29,3 +29,23 @@ document.querySelector("#viewMsg").addEventListener('click',() => {
     findMessages(passcode);
 
 } )
+*/
+
+document.querySelector('#viewMsg').addEventListener('click', (e) =>{
+    const userPasscodeGuess = document.querySelector("#passcode").value;
+    const messagesRef = firebase.database().ref();
+    messagesRef.on('value', (snapshot) =>{
+        const data = snapshot.val();
+        for (let key in data){
+            console.log(key);
+            if (data[key].passcode == userPasscodeGuess){
+            display(data[key]);
+            }
+        }
+    })
+})
+
+function display(messageObject){
+    console.log(message);
+    document.querySelector("#message").innerHTML = messageObject.message;
+}
